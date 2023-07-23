@@ -24,6 +24,7 @@ const ChatScreen: React.FC = () => {
   const [chats, setChats] = useState<Chat[]>([]);
   const [openAttach, setOpenAttach] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
   const fetchChats = async () => {
     try {
@@ -31,11 +32,13 @@ const ChatScreen: React.FC = () => {
       const data = await response.json();
       if (data.status === 'success') {
         setChats(data.chats);
+        setDataLoaded(true);
       }
     } catch (error) {
       console.error('Error fetching chats:', error);
     }
   };
+
   let menuRef = useRef<HTMLDivElement>(null);
   let attachRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -48,13 +51,14 @@ const ChatScreen: React.FC = () => {
     document.addEventListener("mousedown", handler);
     return () => {
       document.removeEventListener("mousedown", handler);
-    }
-  });
-  useEffect(() => {
-    fetchChats();
-    const interval = setInterval(fetchChats, 5000); // Fetching new messages every 5 seconds
-    return () => clearInterval(interval);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!dataLoaded) {
+      fetchChats();
+    }
+  }, [dataLoaded]);
 
   const renderChatMessages = () => {
     return chats.map((chat) => (
@@ -94,7 +98,7 @@ const ChatScreen: React.FC = () => {
           <div className='child2'>
             <div className="group1">
               <div className="grp-profile">
-                <img className="grp-profile-image" src="assets/photo.png" alt="Group Profile" />
+                <img className="grp-profile-image" src="/assets/photo.png" alt="Group Profile" />
                 <div className="grp-name">
                   <div className="my-add">From <b>IGI Airport, T3</b></div>
                   <div className="sender-add">To <b>Sector 28</b></div>
