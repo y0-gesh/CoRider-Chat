@@ -4,8 +4,6 @@ import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import SmsFailedOutlinedIcon from '@mui/icons-material/SmsFailedOutlined';
 
 const DotMenu = () => {
-
-
   return (
     <div>
       <ul className='dot-menu-container'>
