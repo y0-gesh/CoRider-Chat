@@ -98,7 +98,7 @@ const ChatScreen: React.FC = () => {
           <div className='child2'>
             <div className="group1">
               <div className="grp-profile">
-                <img className="grp-profile-image" src="/assets/photo.png" alt="Group Profile" />
+                <img className="grp-profile-image" src="/images/photo.png" alt="Group Profile" />
                 <div className="grp-name">
                   <div className="my-add">From <b>IGI Airport, T3</b></div>
                   <div className="sender-add">To <b>Sector 28</b></div>
